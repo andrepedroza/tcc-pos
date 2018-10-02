@@ -22,7 +22,7 @@ const resolvers = {
     async quadros (_, { usuarioId }) {
       let quadros
       if (!usuarioId) { quadros = await Quadro.all() }
-      else { quadros = await Quadro.query().where('usuario_id', usuarioId) }
+      else { quadros = await Quadro.query().where('usuario_id', usuarioId).fetch() }
       return quadros.toJSON()
     },
     async quadro (_, { id }) {
@@ -33,13 +33,13 @@ const resolvers = {
     async listas (_, { quadroId }) {
       let listas
       if (!quadroId) { listas = await Lista.all() }
-      else { listas = await Lista.query().where('quadro_id', quadroId) }
+      else { listas = await Lista.query().where('quadro_id', quadroId).fetch() }
       return listas.toJSON()
     },
     async cartoes (_, { listaId }) {
       let cartoes
       if (!listaId) { cartoes = await Cartao.all() }
-      else { cartoes = await Cartao.query().where('lista_id', listaId) }
+      else { cartoes = await Cartao.query().where('lista_id', listaId).fetch() }
       return cartoes.toJSON()
     },
     async cartao (_, { id }) {
